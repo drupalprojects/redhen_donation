@@ -786,13 +786,11 @@ function redhen_donation_form_submit($form, &$form_state) {
 
   if ($recurring_product) {
     $pledged = redhen_donation_pledged($order_total, $product_wrapper);
-    $received = $order_total;
   }
   else {
-    $pledged = $received = $order_total;
+    $pledged = $order_total;
   }
   $donation->pledged = $pledged;
-  $donation->received = $received;
 
   $order_id = $order_wrapper->order_id->value();
   if ($recurring_product) {
