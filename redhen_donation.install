@@ -50,6 +50,12 @@ function redhen_donation_schema() {
         'not null' => TRUE,
         'default' => 0,
       ),
+      'anonymous' => array(
+        'description' => 'Flag for whether a donor wishes to remain anonymous.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
       'transaction_entity_type' => array(
         'description' => 'The entity type of the transaction (order or recurring) associated with this donation.',
         'type' => 'varchar',

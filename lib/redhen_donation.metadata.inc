@@ -129,6 +129,15 @@ class RedhenDonationMetadataController extends EntityDefaultMetadataController {
       'description' => t("The RedHen contact associated with this donation."),
     );
 
+    $properties['anonymous'] = array(
+      'label' => t("Anonymous"),
+      'type' => 'bool',
+      'schema field' => 'anonymous',
+      'getter callback' => 'entity_property_verbatim_get',
+      'setter callback' => 'entity_property_verbatim_set',
+      'description' => t("Whether this donation is anonymous."),
+    );
+
     return $info;
   }
 
