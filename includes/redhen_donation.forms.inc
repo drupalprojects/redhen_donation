@@ -139,6 +139,12 @@ function redhen_donation_entity_settings_form($form, &$form_state, $settings, $e
     '#tree' => TRUE,
   );
 
+  $form['settings']['allow_anonymous'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Allow anonymous donation'),
+    '#default_value' => isset($settings['settings']['allow_anonymous']) ? $settings['settings']['allow_anonymous'] : NULL,
+  );
+
   $form['settings']['confirmation_page'] = array(
     '#type' => 'textfield',
     '#title' => t('Confirmation page'),
@@ -360,6 +366,13 @@ function redhen_donation_form($form, &$form_state, RedhenDonation $donation) {
 
   module_load_include('inc', 'redhen_contact', 'includes/redhen_contact.forms');
 
+  if (!empty($settings['settings']['allow_anonymous'])) {
+    $form['anonymous'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('I prefer to make this donation anonymously.'),
+      '#default_value' => FALSE,
+    );
+  }
   // Get contact type form.
   $form['redhen_contact'] = array(
     '#type' => 'fieldset',
@@ -816,7 +829,9 @@ function redhen_donation_form_submit($form, &$form_state) {
   }
   $donation->pledged = $pledged;
   $donation->received = $received;
-
+  if (isset($form_state['values']['anonymous'])) {
+    $donation->anonymous = $form_state['values']['anonymous'];
+  }
   // Notify field widgets.
   field_attach_submit('redhen_donation', $donation, $form, $form_state);
 

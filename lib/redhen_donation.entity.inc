@@ -17,6 +17,7 @@ class RedhenDonation extends Entity {
   public $entity_type;
   public $author_uid;
   public $contact_id;
+  public $anonymous;
   public $status;
   public $transaction_entity_type;
   public $transaction_entity_id;
@@ -70,7 +71,7 @@ class RedhenDonation extends Entity {
       '#weight' => -10,
       '#classes' => 'field field-label-inline clearfix',
     );
-
+    
     $contact_uri = entity_uri('redhen_contact', $wrapper->contact->value());
     $content['contact'] = array(
       '#theme' => 'redhen_property_field',
